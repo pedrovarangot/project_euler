@@ -4,9 +4,11 @@ import sys
 import math
 
 def remove_multiples(factors, number):
+    nums = []
     for n in factors:
         if n == number or n % number != 0:
-            yield n
+            nums.append(n)
+    return nums
 
 t = int(input().strip())
 for a0 in range(t):

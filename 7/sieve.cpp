@@ -4,7 +4,7 @@
 
 using namespace std;
 
-static const int MAX = 1000;
+static const int MAX = 1000000;
 vector<bool> isprime(MAX);
 
 int main()
@@ -17,9 +17,9 @@ int main()
     
     cin >> n;
 
-    for(int i = 2; i < (int)sqrt(MAX); ++i) {
+    for(int i = 2; i < sqrt(MAX); ++i) {
         if(isprime[i]) {
-            for(int j = 2; j < (int)sqrt(MAX); ++j) {
+            for(int j = i; j*i < MAX; ++j) {
                 isprime[j*i] = false;
             }
         }

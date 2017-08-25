@@ -13,11 +13,15 @@ def remove_multiples(factors, number):
 t = int(input().strip())
 for a0 in range(t):
     num = int(input().strip())
-    factors = range(2, int(num/2) + 1)
+    if num < 105:
+        factors = range(2, int(num/2) + 1)
+    else:
+        factors = range(2, int(math.sqrt(num)) + 1)
     sieve = list(factors)
     sieve.append(num)
     for n in sieve:
         sieve = remove_multiples(sieve, n)
+#    print(sieve)
     for n in sorted(sieve, reverse=True):
         if num % n == 0:
             print(n)

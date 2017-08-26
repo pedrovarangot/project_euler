@@ -6,7 +6,9 @@
 #include <algorithm>
 using namespace std;
 
-unordered_map<long long, int> collatz_length;
+//unordered_map<long long, int> collatz_length;
+#define MAX 10000000
+vector<int> collatz_length_v(MAX);
 
 int do_a_collatz(long long n)
 {
@@ -17,20 +19,23 @@ int do_a_collatz(long long n)
     } else {
         new_candidate = n * 3 + 1; 
     }
-    auto found = collatz_length.find(new_candidate);
-    if(found != collatz_length.end()) {
-        collatz_length[n] = found->second + 1;
-        return 1 + found->second;
+    //auto found = collatz_length.find(new_candidate);
+    bool found = new_candidate < MAX && collatz_length_v[new_candidate] != -1;
+    if(found /*!= collatz_length.end()*/) {
+        int rv = collatz_length_v[new_candidate] + 1;
+        if(n < MAX) collatz_length_v[n] = rv;
+        return rv;
     }  else {
         int rv = 1 + do_a_collatz(new_candidate);
-        collatz_length[n] = rv;
-        return rv;;
+        if(n < MAX) collatz_length_v[n] = rv;
+        return rv;
     }
 }
 
 int main() {
     int t;
-    collatz_length[1] = 1;
+    for(int i = 0; i < MAX; ++i) collatz_length_v[i] = -1;
+    collatz_length_v[1] = 1;
     cin >> t;
   
     int biggest_result = 1;
@@ -42,11 +47,11 @@ int main() {
         int n, this_chain_length, max_chain_length, the_starting_number;
         cin >> n;
         the_starting_number = old_results[min(biggest_result,n)];
-        max_chain_length = collatz_length[old_results[min(biggest_result,n)]];
+        max_chain_length = collatz_length_v[old_results[min(biggest_result,n)]];
         for(int i = biggest_result; i <= n; ++i) {
-            auto found = collatz_length.find(i);
-            if(found != collatz_length.end()) {
-                this_chain_length = found->second;
+            //auto found = collatz_length.find(i);
+            if(collatz_length_v[i] != -1/*found != collatz_length.end()*/) {
+                this_chain_length = collatz_length_v[i];
             }  else {
                 this_chain_length = do_a_collatz(i);
             }

@@ -42,7 +42,7 @@ int main() {
         int n, this_chain_length, max_chain_length, the_starting_number;
         cin >> n;
         the_starting_number = old_results[min(biggest_result,n)];
-        max_chain_length = collatz_length[min(biggest_result,n)];
+        max_chain_length = collatz_length[old_results[min(biggest_result,n)]];
         for(int i = biggest_result; i <= n; ++i) {
             auto found = collatz_length.find(i);
             if(found != collatz_length.end()) {

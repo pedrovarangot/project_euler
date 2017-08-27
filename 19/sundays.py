@@ -8,9 +8,10 @@ def leap(y):
     return rv
 
 def first_day_of_year(y):
-
-    years = y - 1899
-    return (365*years + (years - 1) // 4 - (years - 1) // 100 +  (years - 1) // 400) % 7
+    y = y - 1
+    K = y % 100
+    J = y // 100
+    return ((1 + 13*14//5 + K + K//4 + J//4 + 5*J) + 6) % 7
 
 daysofmonth = {1: 31, 2:28, 3:31, 4:30, 5:31, 6:30, 7:31, 8:31, 9:30, 10:31, 11:30, 12:31}
 def advance_days_with_leap(y, m):
@@ -27,7 +28,7 @@ def number_of_first_sundays(y, jd, m):
     month = m
     rv = 0
     while(day < jd):
-        print("first of {} is {}".format(month, first_day))
+        #print("first of {} is {}".format(month, first_day))
         if first_day == 0:
             rv += 1
         jump = advance_days_with_leap(y,month)
@@ -45,4 +46,8 @@ def number_day_of_year(y, m, d):
         m -= 1
     return day
 
-        
+def test():
+    total = 0
+    for i in range(2000, 2020):
+        total += number_of_first_sundays(i, number_day_of_year(i, 12, 31), 1)
+    return total

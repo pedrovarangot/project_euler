@@ -24,11 +24,11 @@ def advance_days_with_leap(y, m):
 
 def number_of_first_sundays(y, jd, m):
     first_day = first_day_of_year(y)
-    day = 1
+    day = number_day_of_year(y, m, 1)
     month = m
     rv = 0
-    while(day < jd):
-        #print("first of {} is {}".format(month, first_day))
+    while(day <= jd):
+        print("first of {} is {}".format(month, first_day))
         if first_day == 0:
             rv += 1
         jump = advance_days_with_leap(y,month)

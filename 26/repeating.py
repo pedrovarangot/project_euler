@@ -27,12 +27,12 @@ def sieve(end):
     return prime_list
 
 def order(n, p):
-    i = p - 1
+    i = 1
     while pow(n,i,p) != 1:
         i += 1
     return i
 
-MAX = 10001
+MAX = 100
 
 maxd = array('I', [0] * (MAX))
 orders = list(map(lambda n: (order(10, n), n), sieve(MAX)[3:]))

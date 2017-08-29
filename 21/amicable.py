@@ -8,7 +8,7 @@ Created on Mon Aug 28 19:40:16 2017
 
 divsums = {}
 
-for i in range(1, 40000):
+for i in range(1, 5000):
     divisor = 2
     divsums[i] = 1
     n = i
@@ -20,6 +20,6 @@ for i in range(1, 40000):
 
 amisums = 0
 for e,s in divsums.items():
-    if e < 10001 and e == divsums[s]:
+    if e < 1001 and e == divsums[s]:
         print(e)
         amisums += e

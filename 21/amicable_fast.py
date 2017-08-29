@@ -9,6 +9,7 @@ Created on Mon Aug 28 19:40:16 2017
 
 import math
 from itertools import combinations
+from array import array
 
 factors_m = {}
 def factors(no):
@@ -29,6 +30,12 @@ def factors(no):
         while n % i == 0:
             factorsl.append(i)
             n = n // i
+        if n in factors_m.keys():
+            new_factors = list(factors_m[n])
+            new_factors.extend(factorsl)
+            #print("hit cached factors!")
+            factors_m[nok] = new_factors
+            return factors_m[nok]
         i += 1
     while no % n == 0 and n != 1:
         #print(n)
@@ -55,12 +62,19 @@ def divisors_less_than(n):
                 rv.add(divisor)
     return rv
 
+amisums_m = array('I',  [0] * 100000)
+max_n = 1
+
 def test(n):
-    amisums = 0
-    for i in range(1, n):
+    global max_n
+    if n < max_n:
+        return amisums_m[n]
+    amisums = amisums_m[max_n]
+    for i in range(max_n, n):
         sd1 = sum(divisors_less_than(i))
         if sd1 != i and i == sum(divisors_less_than(sd1)):
             #print(sd1)
-            amisums += sd1
+            amisums += i
+        amisums_m[i] = amisums
+        max_n = i
     return amisums
-        

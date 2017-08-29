@@ -32,15 +32,18 @@ def order(n, p):
         i += 1
     return i
 
-MAX = 100
+MAX = 10001
 
 maxd = array('I', [0] * (MAX))
 orders = list(map(lambda n: (order(10, n), n), sieve(MAX)[3:]))
 
 maxtup = (1,3)
 for i in range(MAX):
-    if len(orders) > 0 and orders[0][1] < i and orders[0][0] > maxtup[0]:
-        maxtup, *orders = orders
+    if len(orders) > 0 and orders[0][1] < i:
+        if orders[0][0] > maxtup[0]:
+            maxtup, *orders = orders
+        else:
+            orders = orders[1:]
     maxd[i] = maxtup[1]
         
 def test(n):

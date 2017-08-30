@@ -82,25 +82,17 @@ def factors(no):
 
 def is_power_of_primepowers2(n):
     tfactors = factors(n)
-    if is_prime_power(n):
-        return True
-    if len(tfactors) == len(set(tfactors)):
+    diff_factors = len(set(tfactors))
+    if diff_factors == 1 or len(tfactors) == diff_factors:
         return True
     for f in set(tfactors):
         if tfactors.count(f) % 2 != 0:
             return False
         
     return True
-        
-def is_power_of_primepowers(n):
-    if n in firstprimes:
-        return True
-    for pp in reversed(primepowers):
-        if n % pp == 0:
-            n = n // pp
-    return n == 1
-        
+
 weirds = set()
+expos = {}
 MAX = 100
 def test2(n):
     global weirds
@@ -113,13 +105,15 @@ def test2(n):
         for j in range(2,n+1):
 
             last = i**j
-            powers.append(last)
             if last in items:
                 weirds.add(i)
+                expos[last].append((i,j))
                 pass
             else:
                 added += 1
                 items.add(last)
+                expos[last] = [(i,j)]
+                powers.append((last, i, j))
         #print(i, added)
         #print(powers)
     return len(items)

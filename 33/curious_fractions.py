@@ -55,6 +55,7 @@ def simplify_curious(n, d, k):
                 positionsd.append(position)
                 position = strd.find(digit, position+1)
                 
+    # This should use permutations of shorter list and not always same order
     if len(positionsn) > len(positionsd):
         positionsd = positionsd * (len(positionsn) // len(positionsd))
     elif len(positionsn) < len(positionsd):

@@ -13,17 +13,18 @@ def lowest_terms(n,d):
     gcdv = gcd(d,n)
     return (n//gcdv, d//gcdv)
 
-def curious_candidate(n,d):
+def curious_candidate(n,d,k):
     if n == d:
         return False
     ndigits = str(n)
     ddigits = str(d)
     for digit in ndigits:
         if digit in ddigits and digit != '0':
-            return True
-    for digit in ddigits:
-        if digit in ndigits and digit != '0':
-            return True
+            if k == 1:
+                return True
+            else:
+                k -= 1
+
     return False
 
 def curious_digits(n,d):
@@ -31,7 +32,8 @@ def curious_digits(n,d):
     ddigits = str(d)
     
     for digit in ndigits:
-        if digit in ddigits:
+        if digit in ddigits and digit != "0":
+            
             yield digit
 
 def simplify_curious(n, d, k):
@@ -91,7 +93,7 @@ def test(num,k):
     sumd = 0
     for d in range(1, maxnum[num]):
         for n in range(1, d):
-            if curious_candidate(n,d):
+            if curious_candidate(n,d,k):
                 #print(n,d)
                 lowest_termsf = lowest_terms(n,d)
                 posibilities = simplify_curious(n,d,k)

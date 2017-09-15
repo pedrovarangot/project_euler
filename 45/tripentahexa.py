@@ -52,8 +52,12 @@ def solves_cuadratic_in_ints(sqres, b, a):
 
 	return False
 
-def test():
-	n, torp, _ = [int(n) for n in input().strip().split()]
+def test(maximums=False):
+	if not maximums:
+		n, torp, _ = [int(n) for n in input().strip().split()]
+	else:
+		n = 2*10**14
+		torp = 3
 	if torp == 3:
 		for i in range(1, n):
 			num = (i*(3*i-1)) // 2

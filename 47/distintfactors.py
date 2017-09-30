@@ -75,4 +75,16 @@ def test():
         if isit:
             print(candidate[0])
 
-
+def test2():
+    n, k = map(int, input().strip().split())
+    upto = n + k
+    candilist = (range(1, upto), range(2, upto), range(3, upto), range(4, upto))
+    candidates = zip(*candilist[:k])
+    for candidate in candidates:
+        isit = True
+        for num in candidate:
+            isit = isit and factorsno(num) == k
+            if not isit:
+                break
+        if isit:
+            print(candidate[0])

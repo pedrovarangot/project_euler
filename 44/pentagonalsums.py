@@ -40,11 +40,17 @@ def solves_cuadratic_in_ints(sqres, b, a):
 
 	return False
 
-pentagonal_numbers = [n*(3*n-1) // 2 for n in range(1,10000)]
-pentagonal_tuples = combinations(pentagonal_numbers, 2)
+pentagonal_numbers = [n*(3*n-1) // 2 for n in range(1,1000000)]
+#pentagonal_tuples = combinations(pentagonal_numbers, 2)
 def test():
 	for t in pentagonal_tuples:
 		if is_pentagonal(sum(t)) and is_pentagonal(t[1] - t[0]):
 			print(t)
 
+def test2():
+	n, k = map(int, input().strip().split())
+	for i in range(k, n):
+		if is_pentagonal(pentagonal_numbers[i] + pentagonal_numbers[i - k]) or\
+			is_pentagonal(pentagonal_numbers[i] - pentagonal_numbers[i - k]):
+			print(pentagonal_numbers[i])
 
